@@ -1,11 +1,13 @@
 import os
 import time
-from selenium import webdriver
+
 from dotenv import load_dotenv
+from loguru import logger
+from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from loguru import logger
-from list_urls import url_list
+
+from list_urls import list_of_urls_anderson
 
 load_dotenv()
 
@@ -32,12 +34,12 @@ username.send_keys(linkedin_login)
 password.send_keys(linkedin_pass)
 time.sleep(2)
 
-submit = driver.find_element("xpath", "//button[@type='submit']").click()
+driver.find_element("xpath", "//button[@type='submit']").click()
 
 """
 add contacts
 """
-for url in url_list:
+for url in list_of_urls_anderson:
     driver.get(url)
     time.sleep(3)
     all_buttons = driver.find_elements(By.TAG_NAME, 'button')
